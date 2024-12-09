@@ -1,6 +1,6 @@
 from dash import Dash, dcc, html
 from data import df
-from components.district_distribution import get_pie_chart
+from components.district_distribution import create_pie_chart
 from components.price_distribution import create_violin_plot
 
 app = Dash(__name__)
@@ -14,7 +14,7 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(
             id='interactive-pie-chart',
-            figure=get_pie_chart()
+            figure=create_pie_chart()
         ),
         html.Button(
             'Back',
