@@ -1,4 +1,4 @@
-from dash import html, Input, Output, State, callback
+from dash import Input, Output, State, callback
 import plotly.express as px
 from data import df
 from config import color_mapping
@@ -14,7 +14,8 @@ def get_pie_chart():
                  hover_data=['listings_count'],
                  labels={'percentage': '% Listings'},
                  color='neighbourhood_group',  # Apply color based on neighbourhood_group
-                 color_discrete_map=color_mapping)
+                 color_discrete_map=color_mapping
+                 )
     pie_chart.update_traces(textposition='outside', textinfo='percent+label')  # Move percentage outside
     return pie_chart
 
