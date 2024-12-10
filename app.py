@@ -7,6 +7,7 @@ app = Dash(__name__)
 
 
 app.layout = html.Div([
+    dcc.Store(id='app-state', data='neighborhood_view'),
     html.H1(
         "Interactive Pie Chart & Violin Plot Dashboard",
         style={'textAlign': 'center'}
