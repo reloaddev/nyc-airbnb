@@ -1,6 +1,7 @@
 from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
 from data import df
+from components.map import create_map
 from components.district_distribution import create_pie_chart
 from components.price_distribution import create_violin_plot
 
@@ -24,7 +25,23 @@ app.layout = html.Div(
         ),
         dbc.Row(
             [
-                dbc.Col(html.Div("Placeholder"), width=6),
+                dbc.Col(
+                    [
+                        html.H3(
+                            "Interactive Map",
+                            style={"textAlign": "center"},
+                        ),
+                        html.Div(
+                            [
+                                dcc.Graph(
+                                    id="interactive-map",
+                                    figure=create_map(),
+                                ),
+                            ]
+                        )
+                    ]
+                    
+                    , width=6),
                 dbc.Col(
                     [
                         html.H3(
