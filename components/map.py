@@ -1,12 +1,12 @@
-from dash import Input, Output, callback
 import plotly.express as px
-from config import color_mapping
+from dash import Input, Output, callback
 from geopandas import GeoDataFrame
 from shapely.geometry import Point
-from data import df
-import pandas as pd
 
-percentage_threshold = 0.03
+from config import color_mapping
+from data import df
+from util.filters import filter_by_neighbourhood_group
+
 geometry = [Point(xy) for xy in zip(df.longitude, df.latitude)]
 df = df.drop(['longitude', 'latitude'], axis=1)
 gdf = GeoDataFrame(df, crs="EPSG:4326", geometry=geometry)
@@ -33,25 +33,8 @@ def create_map():
 def update_map(selected_area):
     if selected_area == "New York City":
         return create_map()
-    filtered_data = gdf[gdf['neighbourhood_group'] == selected_area].copy()
-    filtered_data.loc[:, 'percentage'] = (filtered_data.groupby('neighbourhood')['neighbourhood'].transform('count') / len(filtered_data))
-    neighbourhoods_below_threshold = filtered_data.loc[
-    filtered_data['percentage'] < percentage_threshold, 'neighbourhood'].unique()
-    other_total_count = filtered_data.loc[
-        filtered_data['neighbourhood'].isin(neighbourhoods_below_threshold), 'neighbourhood'].count()
-    other_percentage = (
-        filtered_data.loc[filtered_data['neighbourhood'].isin(neighbourhoods_below_threshold), 'percentage'].sum()
-    )
-    filtered_data = filtered_data[~filtered_data['neighbourhood'].isin(neighbourhoods_below_threshold)]
-    if other_total_count > 0:
-        other_row = pd.DataFrame({
-            'neighbourhood': ['Other'],
-            'percentage': [other_percentage],
-            'calculated_host_listings_count': [other_total_count]
-        })
-        filtered_data = pd.concat([filtered_data, other_row], ignore_index=True)
+    filtered_data = filter_by_neighbourhood_group(df=gdf, neighbourhood_group=selected_area, threshold=0.03)
 
-    filtered_data = filtered_data[filtered_data['percentage'] >= percentage_threshold]
     created_map = px.scatter_map(
         filtered_data,
         lat=filtered_data.geometry.y,

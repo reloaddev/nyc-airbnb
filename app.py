@@ -19,7 +19,7 @@ app.layout = html.Div(
         dbc.Row([
             dbc.Col([
                 html.H3(
-                    "Interactive Map",
+                    "New York City Map",
                     style={"textAlign": "center"},
                 ),
                 html.Div([
