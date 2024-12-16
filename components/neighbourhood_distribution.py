@@ -12,7 +12,7 @@ neighbourhood_group_data['percentage'] = (neighbourhood_group_data['calculated_h
 
 
 # Minimum percentage to include neighbourhood in pie chart
-percentage_threshold = 0.05
+percentage_threshold = 0.03
 
 
 def create_pie_chart():
@@ -21,7 +21,6 @@ def create_pie_chart():
         names='neighbourhood_group',
         values='percentage',
         title="Percentage of listings by Neighbourhood Group",
-        hover_data=['calculated_host_listings_count'],
         labels={'percentage': '% Listings'},
         color='neighbourhood_group',
         color_discrete_map=color_mapping
@@ -69,13 +68,11 @@ def update_pie_chart(selected_area):
     # Step 4: Remove rows again below percentage_threshold (including "Other" if it's < percentage_threshold)
     filtered_data = filtered_data[filtered_data['percentage'] >= percentage_threshold]
 
-    # Step 5: Create the Pie Chart
     pie_chart = px.pie(
         filtered_data,
         names='neighbourhood',
         values='percentage',
         title=f"Percentage of listings in {selected_area} by Subgroup",
-        hover_data=['calculated_host_listings_count'],
         labels={'percentage': '% Listings'},
         color='neighbourhood',
         color_discrete_map=color_mapping

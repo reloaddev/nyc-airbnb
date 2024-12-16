@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
 from components.area_select import create_area_select
-from components.area_distribution import create_pie_chart
+from components.neighbourhood_distribution import create_pie_chart
 from components.map import create_map
 from components.price_distribution import create_violin_plot
 from data import df
