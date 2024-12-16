@@ -31,7 +31,7 @@ def create_violin_plot(data, title, color_key):
 
 @callback(
     Output('violin-plot', 'figure'),
-    Input('neighbourhood-group-dropdown', 'value')
+    Input('area-select', 'value')
 )
 def update_violin_plot(selected_group):
     if selected_group:
