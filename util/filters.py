@@ -8,7 +8,7 @@ def filter_by_neighbourhood_group(df, neighbourhood_group, threshold):
     Parameters:
         df: pandas DataFrame             - the data to filter
         neighbourhood_group: str         - the neighbourhood group to filter by
-        threshold: float                 - the percentage threshold to filter by
+        threshold: float                 - the percentage threshold to filter by (if neighbourhood is below, it is grouped into "Other")
     Returns:
         filtered_data: pandas DataFrame  - filtered data of neighbourhoods of neighbourhood_group
     """
@@ -41,3 +41,12 @@ def filter_by_neighbourhood_group(df, neighbourhood_group, threshold):
         filtered_data = pd.concat([filtered_data, other_row], ignore_index=True)
 
     return filtered_data[filtered_data['percentage'] >= threshold]
+
+
+def filter_outliers(dataframe, column):
+    Q1 = dataframe[column].quantile(0.25)
+    Q3 = dataframe[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return dataframe[(dataframe[column] >= lower_bound) & (dataframe[column] <= upper_bound)]

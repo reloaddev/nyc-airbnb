@@ -2,9 +2,10 @@ import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
 from components.area_select import create_area_select
-from components.neighbourhood_distribution import create_pie_chart
 from components.map import create_map
+from components.neighbourhood_distribution import create_pie_chart
 from components.price_distribution import create_violin_plot
+from components.price_rating import update_price_rating_scatter
 from data import df
 
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -27,6 +28,16 @@ app.layout = html.Div(
                         id="interactive-map",
                         figure=create_map(),
                     ),
+                ]),
+                html.H3(
+                    "Price Rating Correlation",
+                    style={"textAlign": "center"},
+                ),
+                html.Div([
+                    dcc.Graph(
+                        id="price-rating-line-chart",
+                        figure=update_price_rating_scatter("New York City"),
+                    )
                 ])
             ], width=6),
             dbc.Col([
@@ -57,7 +68,6 @@ app.layout = html.Div(
         ])
     ]
 )
-
 
 if __name__ == "__main__":
     app.run_server(debug=True)

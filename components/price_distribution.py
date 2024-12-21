@@ -1,16 +1,9 @@
-from dash import Input, Output, callback
 import plotly.express as px
+from dash import Input, Output, callback
+
 from config import color_mapping
 from data import df
-
-# Remove outliers based on the Interquartile Range (IQR)
-def filter_outliers(dataframe, column):
-    Q1 = dataframe[column].quantile(0.25)
-    Q3 = dataframe[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    return dataframe[(dataframe[column] >= lower_bound) & (dataframe[column] <= upper_bound)]
+from util.filters import filter_outliers
 
 filtered_df = filter_outliers(df, 'price')
 
@@ -28,6 +21,7 @@ def create_violin_plot(data, title, color_key):
         color_discrete_sequence=[color_mapping["Overall"]] if color_key == "Overall" else None,
         color_discrete_map=color_mapping if color_key != "Overall" else None,
     )
+
 
 @callback(
     Output('violin-plot', 'figure'),

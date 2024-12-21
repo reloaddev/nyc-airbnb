@@ -20,9 +20,9 @@ def create_map():
         color_discrete_map=color_mapping,
         color='neighbourhood_group',
         size_max=50,
-        zoom=10
+        zoom=9
     )
-    created_map.update_layout(height=1200)
+    created_map.update_layout(height=700)
     return created_map
 
 
@@ -44,5 +44,5 @@ def update_map(selected_area):
         size_max=50,
         zoom=11
     )
-    created_map.update_layout(height=1200)
+    created_map.update_layout(height=700)
     return created_map
