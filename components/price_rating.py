@@ -2,7 +2,7 @@ import plotly.express as px
 from dash import Input, Output, callback
 import pandas as pd
 
-from config import get_colors_for_neighborhood_group, get_trendline_color_for_neighborhood_group
+from config import get_colors_for_neighborhood_group, get_trendline_color_for_neighborhood_group, color_mapping_nyc
 from data import df
 from util.filters import filter_by_neighbourhood_group, filter_outliers
 
@@ -28,14 +28,15 @@ def update_price_rating_scatter(selected_area):
         filtered_data,
         x="price",
         y="rating",
-        opacity=0.4,
-        color="neighbourhood_group",
-        color_discrete_map=get_colors_for_neighborhood_group('New York City'),
+        color="neighbourhood_group" if selected_area != "New York City" else None,
+        color_discrete_map=get_colors_for_neighborhood_group('New York City') if selected_area != "New York City" else None,
         trendline="ols",
         trendline_options=dict(log_x=True),
         trendline_color_override=get_trendline_color_for_neighborhood_group(selected_area),
         title=f"Price - Rating Correlation in {selected_area}"
     )
+    if selected_area == "New York City":
+        fig.update_traces(marker=dict(color=color_mapping_nyc.get('New York City')))
     fig.update_layout(
         xaxis_title="Price",
         yaxis_title="Rating",
@@ -43,7 +44,8 @@ def update_price_rating_scatter(selected_area):
         height=450,
         margin=dict(t=50, b=50, l=50, r=50),
         plot_bgcolor="white",
-        paper_bgcolor="white"
+        paper_bgcolor="white",
+        yaxis_range=[4, 5]
     )
     return fig
 

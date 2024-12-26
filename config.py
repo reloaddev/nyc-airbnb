@@ -4,7 +4,7 @@ color_mapping_nyc = {
     'Manhattan': '#c27ba0',
     'Queens': '#e06666',
     'Staten Island': '#93c47d',
-    'Overall': '#9db59f'
+    'New York City': '#9db59f'
 }
 
 color_mapping_bronx = {
