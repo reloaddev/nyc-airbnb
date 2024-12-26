@@ -1,7 +1,6 @@
 import plotly.express as px
 from dash import Input, Output, callback
 
-from config import color_mapping
 from data import df
 from util.filters import filter_outliers
 
@@ -17,9 +16,7 @@ def get_nyc_price_distribution(data, title, color_key):
         title=title,
         labels={"price": "Price per night"},
         hover_data=["neighbourhood", "room_type"],
-        color='neighbourhood_group' if color_key != "Overall" else None,
-        color_discrete_sequence=[color_mapping["Overall"]] if color_key == "Overall" else None,
-        color_discrete_map=color_mapping if color_key != "Overall" else None,
+        color='neighbourhood_group' if color_key != "Overall" else None
     )
 
 
@@ -39,6 +36,9 @@ def get_neighbourhood_group_price_distribution(selected_group):
         paper_bgcolor='white',
         plot_bgcolor='white',
         xaxis=dict(showgrid=True, gridcolor='lightgray'),
-        yaxis=dict(showgrid=True, gridcolor='lightgray')
+        yaxis=dict(showgrid=True, gridcolor='lightgray'),
+        width=700,
+        height=450,
+        margin=dict(t=50, b=50, l=50, r=50)
     )
     return fig

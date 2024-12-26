@@ -51,7 +51,6 @@ app.layout = html.Div(
                         figure=get_nyc_neighbourhood_distribution(),
                     )
                 ]),
-                html.Hr(),
                 html.Div([
                     html.H3(
                         "Apartment Price Distribution",
@@ -60,7 +59,7 @@ app.layout = html.Div(
                     dcc.Graph(
                         id="violin-plot",
                         figure=get_nyc_price_distribution(
-                            df, "Overall Price Distribution", "Overall"
+                            df, "Overall Price Distribution", "New York City"
                         ),
                     ),
                 ])

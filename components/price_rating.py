@@ -35,7 +35,12 @@ def update_price_rating_scatter(selected_area):
         fig.update_layout(
             xaxis_title="Price",
             yaxis_title="Rating",
-            scattermode="group"
+            scattermode="group",
+            width=700,
+            height=450,
+            margin=dict(t=50, b=50, l=50, r=50),
+            plot_bgcolor="white",
+            paper_bgcolor="white"
         )
         return fig
 
@@ -52,7 +57,12 @@ def update_price_rating_scatter(selected_area):
     )
     fig.update_layout(
         xaxis_title="Price",
-        yaxis_title="Rating"
+        yaxis_title="Rating",
+        width=700,
+        height=450,
+        margin=dict(t=50, b=50, l=50, r=50),
+        plot_bgcolor="white",
+        paper_bgcolor="white"
     )
     return fig
 
