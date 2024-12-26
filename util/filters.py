@@ -12,6 +12,9 @@ def filter_by_neighbourhood_group(df, neighbourhood_group, threshold):
     Returns:
         filtered_data: pandas DataFrame  - filtered data of neighbourhoods of neighbourhood_group
     """
+    if neighbourhood_group == 'New York City':
+        return df
+
     filtered_data = df[df['neighbourhood_group'] == neighbourhood_group].copy()
 
     # Step 1: Calculate percentage for each neighbourhood

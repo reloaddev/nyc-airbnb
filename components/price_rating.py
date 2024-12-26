@@ -22,36 +22,13 @@ filtered_df = filtered_df.dropna(subset=['price', 'rating'])
     Input('area-select', 'value')
 )
 def update_price_rating_scatter(selected_area):
-    if selected_area == "New York City":
-        fig = px.scatter(
-            filtered_df,
-            x="price",
-            y="rating",
-            opacity=0.4,
-            color="neighbourhood_group",
-            trendline="ols",
-            title="Price - Rating Correlation in New York City"
-        )
-        fig.update_layout(
-            xaxis_title="Price",
-            yaxis_title="Rating",
-            scattermode="group",
-            width=700,
-            height=450,
-            margin=dict(t=50, b=50, l=50, r=50),
-            plot_bgcolor="white",
-            paper_bgcolor="white"
-        )
-        return fig
-
-    # Filter data based on area
     filtered_data = filter_by_neighbourhood_group(filtered_df, neighbourhood_group=selected_area, threshold=0.03)
     fig = px.scatter(
         filtered_data,
         x="price",
         y="rating",
         opacity=0.4,
-        color="neighbourhood",
+        color="neighbourhood_group",
         trendline="ols",
         title=f"Price - Rating Correlation in {selected_area}"
     )
