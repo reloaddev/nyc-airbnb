@@ -28,13 +28,13 @@ def create_violin_plot(data, title, color_key):
     Input('area-select', 'value')
 )
 def update_violin_plot(selected_group):
-    if selected_group:
-        filtered_data = filtered_df[filtered_df['neighbourhood_group'] == selected_group]
-        title = f"Price Distribution in {selected_group}"
-    else:
+    if selected_group == "New York City":
         filtered_data = filtered_df
         title = "Overall Price Distribution"
-        selected_group = 'Overall'  # Use 'Overall' color for combined data
+    else:
+        selected_group = 'New York City'
+        filtered_data = filtered_df[filtered_df['neighbourhood_group'] == selected_group]
+        title = f"Price Distribution in {selected_group}"
     fig = create_violin_plot(filtered_data, title, selected_group)
     fig.update_layout(
         paper_bgcolor='white',

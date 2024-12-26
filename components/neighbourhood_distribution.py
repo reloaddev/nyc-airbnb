@@ -6,29 +6,20 @@ from data import df
 from util.filters import filter_by_neighbourhood_group
 
 
-def create_pie_chart():
+def get_nyc_neighbourhood_distribution():
     filtered_data = df.copy()
-    filtered_data.loc[:, 'percentage'] = (
-            filtered_data
-            .groupby('neighbourhood_group')['neighbourhood_group']
-            .transform('count') / len(filtered_data)
-    )
-    filtered_data.loc[:, 'absolute_count'] = (
-        filtered_data
-        .groupby('neighbourhood_group')['neighbourhood_group']
-        .transform('count')
-    )
-    pie_chart = px.pie(
+    pie_chart = px.sunburst(
         filtered_data,
         names='neighbourhood_group',
-        title="Percentage of listings by neighbourhood group",
-        hover_data=['absolute_count'],
+        title="Distribution of apartments by neighbourhood group and neighbourhoods",
+        path=['neighbourhood_group', 'neighbourhood'],
         color='neighbourhood_group',
         color_discrete_map=color_mapping
     )
-    pie_chart.update_traces(
-        hovertemplate='<b>%{label}</b><br>Absolute Count: %{customdata[0]}<extra></extra>',
-        customdata=filtered_data[['absolute_count']]
+    pie_chart.update_layout(
+        width=900,
+        height=600,
+        margin=dict(t=50, b=50, l=50, r=50)
     )
     return pie_chart
 
@@ -37,9 +28,9 @@ def create_pie_chart():
     Output('interactive-pie-chart', 'figure'),
     Input('area-select', 'value')
 )
-def update_pie_chart(selected_area):
+def get_group_neighbourhood_distribution(selected_area):
     if selected_area == "New York City":
-        return create_pie_chart()
+        return get_nyc_neighbourhood_distribution()
     filtered_data = filter_by_neighbourhood_group(df=df, neighbourhood_group=selected_area, threshold=0.03)
     filtered_data.loc[:, 'absolute_count'] = filtered_data.groupby('neighbourhood')['neighbourhood'].transform('count')
 

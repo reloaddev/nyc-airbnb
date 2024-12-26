@@ -3,7 +3,7 @@ from dash import Dash, dcc, html
 
 from components.area_select import create_area_select
 from components.map import create_map
-from components.neighbourhood_distribution import create_pie_chart
+from components.neighbourhood_distribution import get_nyc_neighbourhood_distribution
 from components.price_distribution import create_violin_plot
 from components.price_rating import update_price_rating_scatter
 from data import df
@@ -20,7 +20,7 @@ app.layout = html.Div(
         dbc.Row([
             dbc.Col([
                 html.H3(
-                    "New York City Map",
+                    "Map View",
                     style={"textAlign": "center"},
                 ),
                 html.Div([
@@ -42,13 +42,13 @@ app.layout = html.Div(
             ], width=6),
             dbc.Col([
                 html.H3(
-                    "Interactive Pie Chart & Violin Plot Dashboard",
+                    "Detail View",
                     style={"textAlign": "center"},
                 ),
                 html.Div([
                     dcc.Graph(
                         id="interactive-pie-chart",
-                        figure=create_pie_chart(),
+                        figure=get_nyc_neighbourhood_distribution(),
                     )
                 ]),
                 html.Hr(),
