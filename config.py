@@ -4,7 +4,7 @@ color_mapping_nyc = {
     'Manhattan': '#c27ba0',
     'Queens': '#e06666',
     'Staten Island': '#93c47d',
-    'New York City': '#9db59f'
+    'New York City': '#6a5acd'
 }
 
 color_mapping_bronx = {
@@ -104,7 +104,7 @@ def get_trendline_color_for_neighborhood_group(group):
     elif group == 'Staten Island':
         return '#6c3b82'
     else:
-        return '#624a60'
+        return '#95a532'
 
 
 

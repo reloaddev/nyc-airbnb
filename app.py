@@ -19,20 +19,12 @@ app.layout = html.Div(
         ], style={"margin": "2rem"}),
         dbc.Row([
             dbc.Col([
-                html.H3(
-                    "Map View",
-                    style={"textAlign": "center"},
-                ),
                 html.Div([
                     dcc.Graph(
                         id="interactive-map",
                         figure=create_map(),
                     ),
                 ]),
-                html.H3(
-                    "Price Rating Correlation",
-                    style={"textAlign": "center"},
-                ),
                 html.Div([
                     dcc.Graph(
                         id="price-rating-line-chart",
@@ -41,10 +33,6 @@ app.layout = html.Div(
                 ])
             ], width=6),
             dbc.Col([
-                html.H3(
-                    "Detail View",
-                    style={"textAlign": "center"},
-                ),
                 html.Div([
                     dcc.Graph(
                         id="interactive-pie-chart",
@@ -52,15 +40,9 @@ app.layout = html.Div(
                     )
                 ]),
                 html.Div([
-                    html.H3(
-                        "Apartment Price Distribution",
-                        style={"textAlign": "center"},
-                    ),
                     dcc.Graph(
                         id="violin-plot",
-                        figure=get_nyc_price_distribution(
-                            df, "Overall Price Distribution", "New York City"
-                        ),
+                        figure=get_nyc_price_distribution(df)
                     ),
                 ])
             ], width=6)

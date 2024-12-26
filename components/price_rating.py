@@ -33,19 +33,20 @@ def update_price_rating_scatter(selected_area):
         trendline="ols",
         trendline_options=dict(log_x=True),
         trendline_color_override=get_trendline_color_for_neighborhood_group(selected_area),
-        title=f"Price - Rating Correlation in {selected_area}"
+        title=f"Price and Rating"
     )
     if selected_area == "New York City":
         fig.update_traces(marker=dict(color=color_mapping_nyc.get('New York City')))
     fig.update_layout(
-        xaxis_title="Price",
-        yaxis_title="Rating",
+        xaxis_title="Price per night in USD",
+        yaxis_title="Rating in Stars",
         width=700,
         height=450,
         margin=dict(t=50, b=50, l=50, r=50),
         plot_bgcolor="white",
         paper_bgcolor="white",
-        yaxis_range=[4, 5]
+        yaxis_range=[4, 5],
+        showlegend=False
     )
     return fig
 

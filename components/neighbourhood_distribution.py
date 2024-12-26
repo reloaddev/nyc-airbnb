@@ -11,7 +11,7 @@ def get_nyc_neighbourhood_distribution():
     pie_chart = px.sunburst(
         filtered_data,
         names='neighbourhood_group',
-        title="Distribution of apartments by neighbourhood group and neighbourhood",
+        title="Distribution of apartments",
         path=['neighbourhood_group', 'neighbourhood'],
         color='neighbourhood_group',
         color_discrete_map=get_colors_for_neighborhood_group('New York City')
@@ -19,7 +19,8 @@ def get_nyc_neighbourhood_distribution():
     pie_chart.update_layout(
         width=700,
         height=450,
-        margin=dict(t=50, b=50, l=50, r=50)
+        margin=dict(t=50, b=50, l=50, r=50),
+        showlegend=False
     )
     return pie_chart
 
@@ -49,6 +50,7 @@ def get_group_neighbourhood_distribution(selected_area):
     pie_chart.update_layout(
         width=700,
         height=450,
-        margin=dict(t=50, b=50, l=50, r=50)
+        margin=dict(t=50, b=50, l=50, r=50),
+        showlegend=False
     )
     return pie_chart

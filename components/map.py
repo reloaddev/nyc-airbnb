@@ -17,7 +17,7 @@ def create_map():
         gdf,
         lat=gdf.geometry.y,
         lon=gdf.geometry.x,
-        title="Apartment locations in New York City",
+        title='Apartment locations',
         color='neighbourhood_group',
         color_discrete_map=get_colors_for_neighborhood_group('New York City'),
         size_max=50,
@@ -26,7 +26,8 @@ def create_map():
     created_map.update_layout(
         width=700,
         height=450,
-        margin=dict(t=50, b=50, l=50, r=50)
+        margin=dict(t=50, b=50, l=50, r=50),
+        showlegend=False
     )
     return created_map
 
@@ -53,6 +54,7 @@ def update_map(selected_area):
     created_map.update_layout(
         width=700,
         height=450,
-        margin=dict(t=50, b=50, l=50, r=50)
+        margin=dict(t=50, b=50, l=50, r=50),
+        showlegend=False
     )
     return created_map
