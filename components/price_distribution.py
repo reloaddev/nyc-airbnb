@@ -1,13 +1,14 @@
 import plotly.express as px
 from dash import Input, Output, callback
 
+from config import get_colors_for_neighborhood_group
 from data import df
 from util.filters import filter_outliers
 
 filtered_df = filter_outliers(df, 'price')
 
 
-def get_nyc_price_distribution(data, title, color_key):
+def get_nyc_price_distribution(data, title, selected_area):
     return px.violin(
         data,
         x="price",
@@ -16,7 +17,8 @@ def get_nyc_price_distribution(data, title, color_key):
         title=title,
         labels={"price": "Price per night"},
         hover_data=["neighbourhood", "room_type"],
-        color='neighbourhood_group' if color_key != "Overall" else None
+        color='neighbourhood_group',
+        color_discrete_map=get_colors_for_neighborhood_group('New York City')
     )
 
 

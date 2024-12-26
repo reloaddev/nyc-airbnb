@@ -3,6 +3,7 @@ from dash import Input, Output, callback
 from geopandas import GeoDataFrame
 from shapely.geometry import Point
 
+from config import get_colors_for_neighborhood_group
 from data import df
 from util.filters import filter_by_neighbourhood_group
 
@@ -18,6 +19,7 @@ def create_map():
         lon=gdf.geometry.x,
         title="Apartment locations in New York City",
         color='neighbourhood_group',
+        color_discrete_map=get_colors_for_neighborhood_group('New York City'),
         size_max=50,
         zoom=9
     )
@@ -44,6 +46,7 @@ def update_map(selected_area):
         lon=filtered_data.geometry.x,
         title=f"Apartment locations in {selected_area}",
         color='neighbourhood',
+        color_discrete_map=get_colors_for_neighborhood_group(selected_area),
         size_max=50,
         zoom=11
     )

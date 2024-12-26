@@ -1,6 +1,7 @@
 import plotly.express as px
 from dash import Input, Output, callback
 
+from config import color_mapping_bronx, get_colors_for_neighborhood_group
 from data import df
 from util.filters import filter_by_neighbourhood_group
 
@@ -12,7 +13,8 @@ def get_nyc_neighbourhood_distribution():
         names='neighbourhood_group',
         title="Distribution of apartments by neighbourhood group and neighbourhood",
         path=['neighbourhood_group', 'neighbourhood'],
-        color='neighbourhood_group'
+        color='neighbourhood_group',
+        color_discrete_map=get_colors_for_neighborhood_group('New York City')
     )
     pie_chart.update_layout(
         width=700,
@@ -37,7 +39,8 @@ def get_group_neighbourhood_distribution(selected_area):
         names='neighbourhood',
         title=f"Distribution of apartments by neighbourhood group and neighbourhood in {selected_area}",
         hover_data=['absolute_count'],
-        color='neighbourhood'
+        color='neighbourhood',
+        color_discrete_map=get_colors_for_neighborhood_group(selected_area)
     )
     pie_chart.update_traces(
         hovertemplate='<b>%{label}</b><br>Absolute Count: %{customdata[0]}<extra></extra>',
