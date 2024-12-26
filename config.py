@@ -92,5 +92,20 @@ def get_colors_for_neighborhood_group(group):
         return color_mapping_nyc
 
 
+def get_trendline_color_for_neighborhood_group(group):
+    if group == 'Bronx':
+        return '#094d94'
+    elif group == 'Brooklyn':
+        return '#895a50'
+    elif group == 'Manhattan':
+        return '#3d8460'
+    elif group == 'Queens':
+        return '#1f9999'
+    elif group == 'Staten Island':
+        return '#6c3b82'
+    else:
+        return '#624a60'
+
+
 
 

@@ -2,7 +2,7 @@ import plotly.express as px
 from dash import Input, Output, callback
 import pandas as pd
 
-from config import get_colors_for_neighborhood_group
+from config import get_colors_for_neighborhood_group, get_trendline_color_for_neighborhood_group
 from data import df
 from util.filters import filter_by_neighbourhood_group, filter_outliers
 
@@ -32,6 +32,8 @@ def update_price_rating_scatter(selected_area):
         color="neighbourhood_group",
         color_discrete_map=get_colors_for_neighborhood_group('New York City'),
         trendline="ols",
+        trendline_options=dict(log_x=True),
+        trendline_color_override=get_trendline_color_for_neighborhood_group(selected_area),
         title=f"Price - Rating Correlation in {selected_area}"
     )
     fig.update_layout(
