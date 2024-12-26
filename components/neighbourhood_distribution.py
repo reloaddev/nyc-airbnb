@@ -11,7 +11,7 @@ def get_nyc_neighbourhood_distribution():
     pie_chart = px.sunburst(
         filtered_data,
         names='neighbourhood_group',
-        title="Distribution of apartments by neighbourhood group and neighbourhoods",
+        title="Distribution of apartments by neighbourhood group and neighbourhood",
         path=['neighbourhood_group', 'neighbourhood'],
         color='neighbourhood_group',
         color_discrete_map=color_mapping
@@ -37,7 +37,7 @@ def get_group_neighbourhood_distribution(selected_area):
     pie_chart = px.pie(
         filtered_data,
         names='neighbourhood',
-        title=f"Percentage of listings in {selected_area} by neighbourhood sub group",
+        title=f"Distribution of apartments by neighbourhood group and neighbourhood in {selected_area}",
         hover_data=['absolute_count'],
         color='neighbourhood',
         color_discrete_map=color_mapping

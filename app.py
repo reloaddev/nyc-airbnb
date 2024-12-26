@@ -4,7 +4,7 @@ from dash import Dash, dcc, html
 from components.area_select import create_area_select
 from components.map import create_map
 from components.neighbourhood_distribution import get_nyc_neighbourhood_distribution
-from components.price_distribution import create_violin_plot
+from components.price_distribution import get_nyc_price_distribution
 from components.price_rating import update_price_rating_scatter
 from data import df
 
@@ -59,7 +59,7 @@ app.layout = html.Div(
                     ),
                     dcc.Graph(
                         id="violin-plot",
-                        figure=create_violin_plot(
+                        figure=get_nyc_price_distribution(
                             df, "Overall Price Distribution", "Overall"
                         ),
                     ),

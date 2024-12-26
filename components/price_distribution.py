@@ -8,7 +8,7 @@ from util.filters import filter_outliers
 filtered_df = filter_outliers(df, 'price')
 
 
-def create_violin_plot(data, title, color_key):
+def get_nyc_price_distribution(data, title, color_key):
     return px.violin(
         data,
         x="price",
@@ -27,15 +27,14 @@ def create_violin_plot(data, title, color_key):
     Output('violin-plot', 'figure'),
     Input('area-select', 'value')
 )
-def update_violin_plot(selected_group):
+def get_neighbourhood_group_price_distribution(selected_group):
     if selected_group == "New York City":
         filtered_data = filtered_df
         title = "Overall Price Distribution"
     else:
-        selected_group = 'New York City'
         filtered_data = filtered_df[filtered_df['neighbourhood_group'] == selected_group]
         title = f"Price Distribution in {selected_group}"
-    fig = create_violin_plot(filtered_data, title, selected_group)
+    fig = get_nyc_price_distribution(filtered_data, title, selected_group)
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
