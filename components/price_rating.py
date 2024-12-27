@@ -28,6 +28,7 @@ def update_price_rating_scatter(selected_area):
         filtered_data,
         x="price",
         y="rating",
+        labels={"price": "Price per night in USD", "rating": "Rating in Stars"},
         color="neighbourhood_group" if selected_area != "New York City" else None,
         color_discrete_map=get_colors_for_neighborhood_group('New York City') if selected_area != "New York City" else None,
         trendline="ols",

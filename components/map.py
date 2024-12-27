@@ -7,9 +7,9 @@ from config import get_colors_for_neighborhood_group
 from data import df
 from util.filters import filter_by_neighbourhood_group
 
-geometry = [Point(xy) for xy in zip(df.longitude, df.latitude)]
-df = df.drop(['longitude', 'latitude'], axis=1)
-gdf = GeoDataFrame(df, crs="EPSG:4326", geometry=geometry)
+df_copy = df.copy()
+geometry = [Point(xy) for xy in zip(df_copy.longitude, df.latitude)]
+gdf = GeoDataFrame(df_copy, crs="EPSG:4326", geometry=geometry)
 
 
 def create_map():
@@ -21,8 +21,14 @@ def create_map():
         color='neighbourhood_group',
         color_discrete_map=get_colors_for_neighborhood_group('New York City'),
         size_max=50,
-        zoom=9
+        zoom=9,
+        custom_data=['neighbourhood_group', 'neighbourhood']
     )
+    created_map.update_traces(
+        hovertemplate=(
+            "Neighborhood Group: %{customdata[0]}<br>"  # Group count
+            "Neighborhood: %{customdata[1]}<br>"
+        ))
     created_map.update_layout(
         width=700,
         height=450,
