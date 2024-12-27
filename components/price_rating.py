@@ -34,7 +34,8 @@ def update_price_rating_scatter(selected_area):
         trendline="ols",
         trendline_options=dict(log_x=True),
         trendline_color_override=get_trendline_color_for_neighborhood_group(selected_area),
-        title=f"Price and Rating"
+        title=f"Price and Rating",
+        opacity=0.6
     )
     if selected_area == "New York City":
         fig.update_traces(marker=dict(color=color_mapping_nyc.get('New York City')))
