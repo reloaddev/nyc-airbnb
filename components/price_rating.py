@@ -7,7 +7,7 @@ from data import df
 from util.filters import filter_by_neighbourhood_group, filter_outliers
 
 # Explicitly make a copy of the DataFrame after filter
-filtered_df = filter_outliers(df, 'price').copy()
+filtered_df = filter_outliers(df.copy(), 'price').copy()
 
 # Replace 'No rating' with None, then convert to numeric
 filtered_df['rating'] = filtered_df['rating'].replace('No rating', None)
@@ -41,8 +41,6 @@ def update_price_rating_scatter(selected_area):
     fig.update_layout(
         xaxis_title="Price per night in USD",
         yaxis_title="Rating in Stars",
-        width=700,
-        height=450,
         margin=dict(t=50, b=50, l=50, r=50),
         plot_bgcolor="white",
         paper_bgcolor="white",

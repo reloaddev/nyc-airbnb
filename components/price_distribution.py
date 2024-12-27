@@ -5,7 +5,7 @@ from config import get_colors_for_neighborhood_group
 from data import df
 from util.filters import filter_outliers
 
-filtered_df = filter_outliers(df, 'price')
+filtered_df = filter_outliers(df.copy(), 'price')
 
 
 def get_nyc_price_distribution(data):
@@ -37,8 +37,6 @@ def get_neighbourhood_group_price_distribution(selected_group):
         plot_bgcolor='white',
         xaxis=dict(showgrid=True, gridcolor='lightgray'),
         yaxis=dict(showgrid=True, gridcolor='lightgray'),
-        width=700,
-        height=450,
         margin=dict(t=50, b=50, l=50, r=50),
         showlegend=False
     )

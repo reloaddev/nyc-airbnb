@@ -6,6 +6,7 @@ from components.map import create_map
 from components.neighbourhood_distribution import get_nyc_neighbourhood_distribution
 from components.price_distribution import get_nyc_price_distribution
 from components.price_rating import update_price_rating_scatter
+from components.room_type_distribution import get_room_type_distribution_bar_chart
 from data import df
 
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -38,13 +39,19 @@ app.layout = html.Div(
                         id="price-rating-line-chart",
                         figure=update_price_rating_scatter("New York City"),
                     )
-                ], style={"width": "50%"}),
+                ], style={"width": "33%"}),
+                html.Div([
+                    dcc.Graph(
+                        id="room-type-distro-chart",
+                        figure=get_room_type_distribution_bar_chart("New York City"),
+                    )
+                ], style={"width": "33%"}),
                 html.Div([
                     dcc.Graph(
                         id="violin-plot",
                         figure=get_nyc_price_distribution(df)
                     ),
-                ], style={"width": "50%"})
+                ], style={"width": "33%"})
             ])
         ], width=12),
     ]
