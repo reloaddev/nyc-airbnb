@@ -17,36 +17,36 @@ app.layout = html.Div(
             dbc.Col(html.H1("New York Airbnb Data Analysis"), width=9),
             dbc.Col(create_area_select(), width=3),
         ], style={"margin": "2rem"}),
-        dbc.Row([
-            dbc.Col([
+        dbc.Col([
+            dbc.Row([
                 html.Div([
                     dcc.Graph(
                         id="interactive-map",
                         figure=create_map(),
                     ),
-                ]),
-                html.Div([
-                    dcc.Graph(
-                        id="price-rating-line-chart",
-                        figure=update_price_rating_scatter("New York City"),
-                    )
-                ])
-            ], width=6),
-            dbc.Col([
+                ], style={"width": "50%"}),
                 html.Div([
                     dcc.Graph(
                         id="interactive-pie-chart",
                         figure=get_nyc_neighbourhood_distribution(),
                     )
-                ]),
+                ], style={"width": "50%"}),
+            ]),
+            dbc.Row([
+                html.Div([
+                    dcc.Graph(
+                        id="price-rating-line-chart",
+                        figure=update_price_rating_scatter("New York City"),
+                    )
+                ], style={"width": "50%"}),
                 html.Div([
                     dcc.Graph(
                         id="violin-plot",
                         figure=get_nyc_price_distribution(df)
                     ),
-                ])
-            ], width=6)
-        ])
+                ], style={"width": "50%"})
+            ])
+        ], width=12),
     ]
 )
 
