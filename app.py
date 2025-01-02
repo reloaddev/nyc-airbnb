@@ -2,6 +2,7 @@ import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
 from components.area_select import create_area_select
+from components.legend import get_legend
 from components.map import create_map
 from components.neighbourhood_distribution import get_nyc_neighbourhood_distribution
 from components.price_distribution import get_nyc_price_distribution
@@ -17,7 +18,8 @@ app.layout = html.Div(
         dbc.Row([
             dbc.Col(html.H1("New York Airbnb Data Analysis"), width=9),
             dbc.Col(create_area_select(), width=3),
-        ], style={"margin": "2rem"}),
+        ], style={"margin-top": "1rem", "background-color": "#FAF9F6"}),
+        dbc.Row(get_legend(), style={"margin-bottom": "1rem", "background-color": "#FAF9F6"}),
         dbc.Col([
             dbc.Row([
                 html.Div([
@@ -54,8 +56,8 @@ app.layout = html.Div(
                 ], style={"width": "33%"})
             ])
         ], width=12),
-    ]
+    ], style={"margin": "2rem"}
 )
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False)
